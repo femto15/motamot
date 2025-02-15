@@ -60,7 +60,7 @@ if st.button("🔍 Sont-ils proches ?"):
                 <style>
                 @keyframes fadeInOut {
                     0% { opacity: 1; }
-                    50% { opacity: 0.5; }
+                    50% { opacity: 0.2; }
                     100% { opacity: 1; }
                 }
                 .flicker {
@@ -82,7 +82,7 @@ if st.button("🔍 Sont-ils proches ?"):
                     """,
                     unsafe_allow_html=True,
                 )
-                time.sleep(0.5)
+                time.sleep(0.2)
 
             # ✅ Final Decision
             final_result = "✅ OUI" if similarity > THRESHOLD else "❌ NON"
