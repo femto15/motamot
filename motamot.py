@@ -4,8 +4,8 @@ import os
 from gensim.models import KeyedVectors
 
 # File and Google Drive settings
-MODEL_PATH = "word2vec.model"
-GOOGLE_DRIVE_ID = "1A2B3C4D5E6F7G8H9"  # Replace with your actual file ID
+MODEL_PATH = "frmodel.bin"
+GOOGLE_DRIVE_ID = "1LREFqIB3mVKOdozoJDhnHxVirIi4EhTl"  # Replace with your actual file ID
 
 # 🔹 Function to download the model if it's missing
 def download_model():
