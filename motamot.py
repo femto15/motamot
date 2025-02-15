@@ -72,7 +72,7 @@ if st.button("🔍 Sont-ils proches ?"):
             )
 
             start_time = time.time()
-            while time.time() - start_time < 5:  # Ensures animation runs for 5 seconds
+            while time.time() - start_time < 4:  # Ensures animation runs for 5 seconds
                 text, color = random.choice(flicker_choices)
                 result_placeholder.markdown(
                     f"""
@@ -82,7 +82,7 @@ if st.button("🔍 Sont-ils proches ?"):
                     """,
                     unsafe_allow_html=True,
                 )
-                time.sleep(0.2)
+                time.sleep(0.4)
 
             # ✅ Final Decision
             final_result = "✅ OUI" if similarity > THRESHOLD else "❌ NON"
@@ -91,10 +91,6 @@ if st.button("🔍 Sont-ils proches ?"):
             # Display final result
             result_placeholder.markdown(
                 f"""
-                <div style='display: flex; justify-content: space-between;'>
-                    <div style='flex: 1; background-color: #34D399; padding: 10px; text-align: center; font-size: 24px; color: white; font-weight: bold;'>✅ OUI</div>
-                    <div style='flex: 1; background-color: #EF4444; padding: 10px; text-align: center; font-size: 24px; color: white; font-weight: bold;'>❌ NON</div>
-                </div>
                 <div style='background-color: {final_color}; padding: 20px; text-align: center; font-size: 40px; color: white; font-weight: bold; margin-top: 10px;'>
                     {final_result}
                 </div>
