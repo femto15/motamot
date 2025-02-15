@@ -50,8 +50,8 @@ if st.button("🔍 Sont-ils proches ?"):
             st.markdown("### 🎡 Vérification... veuillez attendre...")
             result_placeholder = st.empty()
 
-            flicker_choices = ["✅ OUI", "❌ NON", word1.upper(), word2.upper()]
-            for _ in range(15):  # Flicker for 3 seconds (~0.2s per frame)
+            flicker_choices = ["✅ OUI", "❌ NON"]
+            for _ in range(25):  # Flicker for 3 seconds (~0.2s per frame)
                 result_placeholder.markdown(
                     f"<h1 style='text-align: center; color: {random.choice(['green', 'red'])};'>{random.choice(flicker_choices)}</h1>", 
                     unsafe_allow_html=True
