@@ -51,18 +51,14 @@ if st.button("🔍 Sont-ils proches ?"):
             result_placeholder = st.empty()
 
             flicker_choices = [
-                (word1.upper(), "#34D399"),  # Green (YES)
-                (word2.upper(), "#EF4444"),  # Red (NO)
+                ("✅ OUI", "#34D399"),  # Green (YES)
+                ("❌ NON", "#EF4444"),  # Red (NO)
             ]
 
             for _ in range(25):  # Flicker for ~5 seconds (0.2s per frame)
                 text, color = random.choice(flicker_choices)
                 result_placeholder.markdown(
                     f"""
-                    <div style='display: flex; justify-content: space-between;'>
-                        <div style='flex: 1; background-color: #34D399; padding: 10px; text-align: center; font-size: 24px; color: white; font-weight: bold;'>✅ OUI</div>
-                        <div style='flex: 1; background-color: #EF4444; padding: 10px; text-align: center; font-size: 24px; color: white; font-weight: bold;'>❌ NON</div>
-                    </div>
                     <div style='background-color: {color}; padding: 20px; text-align: center; font-size: 32px; color: white; font-weight: bold; margin-top: 10px;'>
                         {text}
                     </div>
@@ -77,10 +73,6 @@ if st.button("🔍 Sont-ils proches ?"):
 
             result_placeholder.markdown(
                 f"""
-                <div style='display: flex; justify-content: space-between;'>
-                    <div style='flex: 1; background-color: #34D399; padding: 10px; text-align: center; font-size: 24px; color: white; font-weight: bold;'>✅ OUI</div>
-                    <div style='flex: 1; background-color: #EF4444; padding: 10px; text-align: center; font-size: 24px; color: white; font-weight: bold;'>❌ NON</div>
-                </div>
                 <div style='background-color: {final_color}; padding: 20px; text-align: center; font-size: 40px; color: white; font-weight: bold; margin-top: 10px;'>
                     {final_result}
                 </div>
