@@ -45,8 +45,11 @@ if st.button("🔍 Sont-ils proches ?"):
         try:
             similarity = model.similarity(word1, word2)
 
-            # 🔥 Flickering Effect (Roulette) - lasts exactly 5 seconds
-            st.markdown("### 🎡 Validation en cours...")
+            # **Placeholder for validation message (will disappear)**
+            validation_message = st.empty()
+            validation_message.markdown("### 🎡 Validation en cours...")
+
+            # **Placeholder for flickering effect**
             result_placeholder = st.empty()
 
             flicker_choices = [
@@ -54,7 +57,7 @@ if st.button("🔍 Sont-ils proches ?"):
                 ("❌ NON", "#EF4444"),  # Red (NO)
             ]
 
-            # CSS Animation for smooth effect
+            # CSS Animation for smooth effect (0.4s duration)
             st.markdown(
                 """
                 <style>
@@ -64,7 +67,7 @@ if st.button("🔍 Sont-ils proches ?"):
                     100% { opacity: 1; }
                 }
                 .flicker {
-                    animation: fadeInOut 0.5s infinite alternate;
+                    animation: fadeInOut 0.4s infinite alternate;
                 }
                 </style>
                 """,
@@ -72,17 +75,20 @@ if st.button("🔍 Sont-ils proches ?"):
             )
 
             start_time = time.time()
-            while time.time() - start_time < 4:  # Ensures animation runs for 5 seconds
+            while time.time() - start_time < 5:  # Ensures animation runs for 5 seconds
                 text, color = random.choice(flicker_choices)
                 result_placeholder.markdown(
                     f"""
-                    <div class='flicker' style='background-color: {color}; padding: 20px; text-align: center; font-size: 32px; color: white; font-weight: bold; margin-top: 10px;'>
+                    <div class='flicker' style='background-color: {color}; padding: 25px; text-align: center; font-size: 36px; color: white; font-weight: bold; margin-top: 10px;'>
                         {text}
                     </div>
                     """,
                     unsafe_allow_html=True,
                 )
-                time.sleep(0.2)
+                time.sleep(0.2)  # Slower flickering (0.4s per switch)
+
+            # **Remove the validation message after animation**
+            validation_message.empty()
 
             # ✅ Final Decision
             final_result = "✅ OUI" if similarity > THRESHOLD else "❌ NON"
@@ -91,7 +97,7 @@ if st.button("🔍 Sont-ils proches ?"):
             # Display final result
             result_placeholder.markdown(
                 f"""
-                <div style='background-color: {final_color}; padding: 20px; text-align: center; font-size: 40px; color: white; font-weight: bold; margin-top: 10px;'>
+                <div style='background-color: {final_color}; padding: 25px; text-align: center; font-size: 42px; color: white; font-weight: bold; margin-top: 10px;'>
                     {final_result}
                 </div>
                 """,
