@@ -45,31 +45,51 @@ if st.button("🔍 Sont-ils proches ?"):
     if word1 and word2:
         try:
             similarity = model.similarity(word1, word2)
-            
+
             # 🔥 Flickering Effect (Roulette)
-            st.markdown("### 🎡 Vérification... veuillez attendre...")
+            st.markdown("### 🎡 Validation...")
             result_placeholder = st.empty()
 
-            flicker_choices = ["✅ OUI", "❌ NON"]
-            for _ in range(25):  # Flicker for 3 seconds (~0.2s per frame)
+            flicker_choices = [
+                (word1.upper(), "#34D399"),  # Green (YES)
+                (word2.upper(), "#EF4444"),  # Red (NO)
+            ]
+
+            for _ in range(25):  # Flicker for ~5 seconds (0.2s per frame)
+                text, color = random.choice(flicker_choices)
                 result_placeholder.markdown(
-                    f"<h1 style='text-align: center; color: {random.choice(['green', 'red'])};'>{random.choice(flicker_choices)}</h1>", 
-                    unsafe_allow_html=True
+                    f"""
+                    <div style='display: flex; justify-content: space-between;'>
+                        <div style='flex: 1; background-color: #34D399; padding: 10px; text-align: center; font-size: 24px; color: white; font-weight: bold;'>✅ OUI</div>
+                        <div style='flex: 1; background-color: #EF4444; padding: 10px; text-align: center; font-size: 24px; color: white; font-weight: bold;'>❌ NON</div>
+                    </div>
+                    <div style='background-color: {color}; padding: 20px; text-align: center; font-size: 32px; color: white; font-weight: bold; margin-top: 10px;'>
+                        {text}
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
                 )
                 time.sleep(0.2)
 
             # ✅ Final Decision
             final_result = "✅ OUI" if similarity > THRESHOLD else "❌ NON"
-            final_color = "green" if similarity > THRESHOLD else "red"
-            
+            final_color = "#34D399" if similarity > THRESHOLD else "#EF4444"
+
             result_placeholder.markdown(
-                f"<h1 style='text-align: center; color: {final_color};'>{final_result}</h1>",
-                unsafe_allow_html=True
+                f"""
+                <div style='display: flex; justify-content: space-between;'>
+                    <div style='flex: 1; background-color: #34D399; padding: 10px; text-align: center; font-size: 24px; color: white; font-weight: bold;'>✅ OUI</div>
+                    <div style='flex: 1; background-color: #EF4444; padding: 10px; text-align: center; font-size: 24px; color: white; font-weight: bold;'>❌ NON</div>
+                </div>
+                <div style='background-color: {final_color}; padding: 20px; text-align: center; font-size: 40px; color: white; font-weight: bold; margin-top: 10px;'>
+                    {final_result}
+                </div>
+                """,
+                unsafe_allow_html=True,
             )
 
             # Display similarity score
             st.info(f"**Similarity Score:** `{similarity:.3f}` (Threshold: {THRESHOLD})")
-
         except KeyError:
             st.error("❌ Un ou des mots n'ont pas été trouvés")
     else:
