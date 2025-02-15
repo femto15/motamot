@@ -60,7 +60,7 @@ if st.button("🔍 Sont-ils proches ?"):
                 <style>
                 @keyframes fadeInOut {
                     0% { opacity: 1; }
-                    50% { opacity: 0.3; }
+                    50% { opacity: 0.5; }
                     100% { opacity: 1; }
                 }
                 .flicker {
