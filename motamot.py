@@ -6,7 +6,6 @@ import random
 from gensim.models import KeyedVectors
 
 # File settings
-# File and Google Drive settings
 MODEL_PATH = "frmodel.bin"
 GOOGLE_DRIVE_ID = "1LREFqIB3mVKOdozoJDhnHxVirIi4EhTl"  # Replace with your actual file ID
 
@@ -16,7 +15,7 @@ def download_model():
         st.info("📥 Chargement du modèle...")
         url = f"https://drive.google.com/uc?id={GOOGLE_DRIVE_ID}"
         gdown.download(url, MODEL_PATH, quiet=False)
-        st.success("✅ Model chargé!")
+        st.success("✅ Modèle chargé!")
 
 # 🔹 Load model with proper format
 @st.cache_resource
@@ -26,7 +25,7 @@ def load_model():
         model = KeyedVectors.load_word2vec_format(MODEL_PATH, binary=True)  # Correct way for .bin models
         return model
     except Exception as e:
-        st.error(f"❌ Failed to load model: {e}")
+        st.error(f"❌ Échec du chargement du modèle: {e}")
         st.stop()
 
 # 🔹 Load model
@@ -46,8 +45,8 @@ if st.button("🔍 Sont-ils proches ?"):
         try:
             similarity = model.similarity(word1, word2)
 
-            # 🔥 Flickering Effect (Roulette)
-            st.markdown("### 🎡 Validation...")
+            # 🔥 Flickering Effect (Roulette) - lasts exactly 5 seconds
+            st.markdown("### 🎡 Validation en cours...")
             result_placeholder = st.empty()
 
             flicker_choices = [
@@ -55,11 +54,29 @@ if st.button("🔍 Sont-ils proches ?"):
                 ("❌ NON", "#EF4444"),  # Red (NO)
             ]
 
-            for _ in range(25):  # Flicker for ~5 seconds (0.2s per frame)
+            # CSS Animation for smooth effect
+            st.markdown(
+                """
+                <style>
+                @keyframes fadeInOut {
+                    0% { opacity: 1; }
+                    50% { opacity: 0.3; }
+                    100% { opacity: 1; }
+                }
+                .flicker {
+                    animation: fadeInOut 0.2s infinite alternate;
+                }
+                </style>
+                """,
+                unsafe_allow_html=True,
+            )
+
+            start_time = time.time()
+            while time.time() - start_time < 5:  # Ensures animation runs for 5 seconds
                 text, color = random.choice(flicker_choices)
                 result_placeholder.markdown(
                     f"""
-                    <div style='background-color: {color}; padding: 20px; text-align: center; font-size: 32px; color: white; font-weight: bold; margin-top: 10px;'>
+                    <div class='flicker' style='background-color: {color}; padding: 20px; text-align: center; font-size: 32px; color: white; font-weight: bold; margin-top: 10px;'>
                         {text}
                     </div>
                     """,
@@ -71,8 +88,13 @@ if st.button("🔍 Sont-ils proches ?"):
             final_result = "✅ OUI" if similarity > THRESHOLD else "❌ NON"
             final_color = "#34D399" if similarity > THRESHOLD else "#EF4444"
 
+            # Display final result
             result_placeholder.markdown(
                 f"""
+                <div style='display: flex; justify-content: space-between;'>
+                    <div style='flex: 1; background-color: #34D399; padding: 10px; text-align: center; font-size: 24px; color: white; font-weight: bold;'>✅ OUI</div>
+                    <div style='flex: 1; background-color: #EF4444; padding: 10px; text-align: center; font-size: 24px; color: white; font-weight: bold;'>❌ NON</div>
+                </div>
                 <div style='background-color: {final_color}; padding: 20px; text-align: center; font-size: 40px; color: white; font-weight: bold; margin-top: 10px;'>
                     {final_result}
                 </div>
@@ -81,7 +103,7 @@ if st.button("🔍 Sont-ils proches ?"):
             )
 
             # Display similarity score
-            st.info(f"**Similarity Score:** `{similarity:.3f}` (Threshold: {THRESHOLD})")
+            st.info(f"**Score de Similarité:** `{similarity:.3f}` (Seuil: {THRESHOLD})")
         except KeyError:
             st.error("❌ Un ou des mots n'ont pas été trouvés")
     else:
