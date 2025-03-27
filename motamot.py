@@ -40,7 +40,17 @@ model = load_model()
 # 🔹 Streamlit UI
 st.title("🔍 Akinamot")
 
-st.image("mascotte.png", width=200, caption="Bienvenue sur Akinamot ! Je peux t'aider à comparer la proximité de deux mots")
+st.markdown(
+    """
+    <div style='display: flex; align-items: center; margin-top: 20px;'>
+        <img src='mascotte.png' width='120' style='margin-right: 20px; border-radius: 10px;' />
+        <div style='color: white; font-weight: bold; font-size: 20px;'>
+            Bienvenue sur Akinamot !<br>Je suis là pour vous aider à comparer deux mots.
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # User inputs (converted to lowercase)
 word1 = st.text_input("🔤 Premier mot:").strip().lower()
