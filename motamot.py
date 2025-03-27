@@ -51,7 +51,7 @@ images = {
 def display_mascotte(state):
     col1, col2 = st.columns([1, 3])
     with col1:
-        st.image(images[state])
+        st.image(images[state],width=100)
     with col2:
         phrase = random.choice(reactions[state])
         st.markdown(
@@ -84,18 +84,18 @@ def load_model():
 st.set_page_config(page_title="Akinamot", layout="centered")
 
 
-col1, col2 = st.columns([1, 3])
-with col1:
-    st.image("mascotte.png",)
-with col2:
-    st.markdown(
-        """
-        <div style='color: white; font-weight: bold; font-size: 20px;'>
-            Bienvenue sur Akinamot !<br>Je suis là pour vous aider à comparer deux mots.
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+# col1, col2 = st.columns([1, 3])
+# with col1:
+#     st.image("mascotte.png",)
+# with col2:
+#     st.markdown(
+#         """
+#         <div style='color: white; font-weight: bold; font-size: 20px;'>
+#             Bienvenue sur Akinamot !<br>Je suis là pour vous aider à comparer deux mots.
+#         </div>
+#         """,
+#         unsafe_allow_html=True
+#     )
 
 word1 = st.text_input("Premier mot:").strip().lower()
 word2 = st.text_input("Deuxième mot:").strip().lower()
