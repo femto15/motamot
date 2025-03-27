@@ -55,7 +55,7 @@ def display_mascotte(state):
     with col2:
         phrase = random.choice(reactions[state])
         st.markdown(
-            f"<div style='color: white; font-weight: bold; font-size: 18px;'>{phrase}</div>",
+            f"<div style='color: yellow; font-weight: bold; font-size: 18px;'>{phrase}</div>",
             unsafe_allow_html=True
         )
 
