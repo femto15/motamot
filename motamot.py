@@ -51,7 +51,7 @@ images = {
 def display_mascotte(state):
     col1, col2 = st.columns([1, 3])
     with col1:
-        st.image(images[state],width=100)
+        st.image(images[state],width=200)
     with col2:
         phrase = random.choice(reactions[state])
         st.markdown(
