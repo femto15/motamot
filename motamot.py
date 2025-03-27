@@ -148,10 +148,10 @@ if st.button("Sont-ils proches ?"):
             mascotte_placeholder.empty()
 
             # Choisir la réaction
-            if similarity > THRESHOLD:
-                state = "win"
-            elif similarity > 0.18:
+            if similarity > 0.18:
                 state = "close"
+            elif similarity > THRESHOLD:
+                state = "win"
             elif similarity < 0.06:
                 state = "far"
             else:
