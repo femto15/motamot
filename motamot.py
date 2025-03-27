@@ -11,11 +11,17 @@ GOOGLE_DRIVE_ID = "1LREFqIB3mVKOdozoJDhnHxVirIi4EhTl"  # Replace with your actua
 
 # 🔹 Function to download the model correctly
 def download_model():
-    if not os.path.exists(MODEL_PATH) or os.path.getsize(MODEL_PATH) < 5000000:  # Ensure file isn't too small
-        st.info("📥 Chargement du modèle...")
+    msg = st.empty() 
+
+    if not os.path.exists(MODEL_PATH) or os.path.getsize(MODEL_PATH) < 5000000:
+        msg.info("📥 Chargement du modèle...")
         url = f"https://drive.google.com/uc?id={GOOGLE_DRIVE_ID}"
         gdown.download(url, MODEL_PATH, quiet=False)
-        st.success("✅ Modèle chargé!")
+        msg.success("✅ Modèle chargé!")
+
+        time.sleep(1.5) 
+
+    msg.empty() 
 
 # 🔹 Load model with proper format
 @st.cache_resource
