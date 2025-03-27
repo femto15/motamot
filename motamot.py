@@ -30,7 +30,7 @@ reactions = {
         "A ce niveau là c'est pas de la proximité, c'est de la fusion",
         "Ces deux mots sont plus proches que deux chaussettes dans un tiroir",
         "Ben oui que c'est proche...Bravo Sherlock",
-        "L'eau ça mouille et le feu ça brûle"
+        "L'eau ça mouille et le feu ça brûle..."
     ],
     "far": [
         "Le jour et la nuit...et vous êtes pas des lumières apparement...",
@@ -152,7 +152,7 @@ if st.button("Sont-ils proches ?"):
                 state = "close"
             elif similarity > THRESHOLD:
                 state = "win"
-            elif similarity < 0.06:
+            elif similarity < 0.09:
                 state = "far"
             else:
                 state = "fail"
