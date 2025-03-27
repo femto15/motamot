@@ -34,6 +34,8 @@ model = load_model()
 # 🔹 Streamlit UI
 st.title("🔍 Akinamot")
 
+st.image("mascotte.png", width=200, caption="Bienvenue sur Akinamot ! Je peux t'aider à comparer la proximité de deux mots")
+
 # User inputs (converted to lowercase)
 word1 = st.text_input("🔤 Premier mot:").strip().lower()
 word2 = st.text_input("🔤 Deuxième mot:").strip().lower()
