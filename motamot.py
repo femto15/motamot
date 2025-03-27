@@ -40,17 +40,18 @@ model = load_model()
 # 🔹 Streamlit UI
 st.title("🔍 Akinamot")
 
-st.markdown(
-    """
-    <div style='display: flex; align-items: center; margin-top: 20px;'>
-        <img src='mascotte.png' width='120' style='margin-right: 20px; border-radius: 10px;' />
-        <div style='color: white; font-weight: bold; font-size: 20px;'>
-            Bienvenue sur Akinamot !<br>Je suis là pour vous aider à comparer deux mots.
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+col1, col2 = st.columns([1, 3])
+
+with col1:
+    st.image("mascotte.png")
+
+with col2:
+    st.markdown(
+        "<div style='color: white; font-weight: bold; font-size: 20px;'>"
+        "Bienvenue sur Akinamot !<br>Je suis là pour vous aider à comparer deux mots."
+        "</div>",
+        unsafe_allow_html=True
+    )
 
 # User inputs (converted to lowercase)
 word1 = st.text_input("🔤 Premier mot:").strip().lower()
